@@ -1,6 +1,7 @@
 package cz.sliva.controller;
 
 import cz.sliva.storage.StorageService;
+import cz.sliva.utils.json.exception.InvalidJsonException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,7 +22,11 @@ public class StorageController {
 
     @PostMapping("/track")
     public ResponseEntity<String> track(@RequestBody final String requestBody) {
-        storageService.store(requestBody);
+        try {
+            storageService.store(requestBody);
+        } catch (InvalidJsonException e) {
+            return new ResponseEntity<>("Send JSON is invalid.", HttpStatus.BAD_REQUEST);
+        }
         return new ResponseEntity<>("Data stored", HttpStatus.OK);
     }
 

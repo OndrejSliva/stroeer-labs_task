@@ -19,10 +19,9 @@ public class CounterStorageRepository implements StorageRepository {
     }
 
     @Override
-    public void store(final String jsonString) {
-        final JSONObject jsonObject = new JSONObject(jsonString);
-        if (jsonObject.has(COUNT_KEY)) {
-            int count = jsonObject.getInt(COUNT_KEY);
+    public void store(final JSONObject json) {
+        if (json.has(COUNT_KEY)) {
+            int count = json.getInt(COUNT_KEY);
             this.stringRedisTemplate.opsForValue().increment(REDIS_COUNTER_KEY, count);
         }
     }

@@ -1,5 +1,6 @@
 package cz.sliva.storage.repository;
 
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Repository;
 
@@ -17,9 +18,9 @@ public class FileStorageRepository implements StorageRepository {
     }
 
     @Override
-    public void store(final String jsonString) {
+    public void store(final JSONObject json) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(this.filePath, true))) {
-            writer.write(jsonString);
+            writer.write(json.toString());
             writer.newLine();
         } catch (IOException e) {
             throw new RuntimeException(e);
