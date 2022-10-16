@@ -6,6 +6,7 @@ import cz.sliva.utils.json.JsonValidator;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class StorageService {
@@ -32,7 +33,7 @@ public class StorageService {
         this.storageRepositories.forEach(storageRepository -> storageRepository.store(jsonString));
     }
 
-    public int getCount() {
+    public Optional<Integer> getCount() {
         return this.counterStorageRepository.getCount();
     }
 }

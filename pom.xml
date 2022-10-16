@@ -39,7 +39,10 @@
             <artifactId>json</artifactId>
             <version>20211205</version>
         </dependency>
-
+        <dependency>
+            <groupId>redis.clients</groupId>
+            <artifactId>jedis</artifactId>
+        </dependency>
 
 
         <dependency>

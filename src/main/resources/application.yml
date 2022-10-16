@@ -2,3 +2,7 @@
 storage:
   flat-file:
     path: "output.json"
+
+redis:
+  host: localhost
+  port: 6379
