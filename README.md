@@ -1,0 +1,1 @@
+# Ströer labs - interview task
