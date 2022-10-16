@@ -1,0 +1,4 @@
+
+storage:
+  flat-file:
+    path: "output.json"
