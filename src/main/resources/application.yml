@@ -1,3 +1,11 @@
+spring:
+  application:
+    name: "Ströer labs - interview task"
+  config:
+    import: "optional:file:./application-local.yml"
+
+server:
+  port : 8080
 
 storage:
   flat-file:
