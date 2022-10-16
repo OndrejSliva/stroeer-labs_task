@@ -2,7 +2,8 @@ package cz.sliva.config;
 
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
-import org.springframework.data.redis.connection.jedis.JedisConnectionFactory;
+import org.springframework.data.redis.connection.RedisConnectionFactory;
+import org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.data.redis.core.ValueOperations;
 
@@ -16,15 +17,18 @@ class AppConfigTest {
     public void shouldCreateJedisConnectionFactoryWithGivenParams() {
         final String host = "example.host";
         final int port = 12345;
-        final JedisConnectionFactory jedisConnectionFactory = appConfiguration.jedisConnectionFactory(host, port);
+        final RedisConnectionFactory redisConnectionFactory = appConfiguration.redisConnectionFactory(host, port);
+        assertInstanceOf(LettuceConnectionFactory.class, redisConnectionFactory);
 
-        assertEquals(host, jedisConnectionFactory.getHostName());
-        assertEquals(port, jedisConnectionFactory.getPort());
+        final LettuceConnectionFactory lettuceConnectionFactory = (LettuceConnectionFactory) redisConnectionFactory;
+
+        assertEquals(host, lettuceConnectionFactory.getHostName());
+        assertEquals(port, lettuceConnectionFactory.getPort());
     }
 
     @Test
     public void shouldCreateRedisTemplate() {
-        final StringRedisTemplate stringRedisTemplate = appConfiguration.redisTemplate(Mockito.mock(JedisConnectionFactory.class));
+        final StringRedisTemplate stringRedisTemplate = appConfiguration.redisTemplate(Mockito.mock(RedisConnectionFactory.class));
     }
 
     @Test

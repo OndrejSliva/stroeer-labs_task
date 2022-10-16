@@ -9,8 +9,8 @@ server:
 
 storage:
   flat-file:
-    path: "output.json"
+    path: "output/output.json"
 
-redis:
+redis-conf:
   host: localhost
   port: 6379
